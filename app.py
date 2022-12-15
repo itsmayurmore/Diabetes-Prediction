@@ -4,9 +4,9 @@ import sqlite3
 
 app = Flask(__name__)
 
-conn = sqlite3.connect('Database/UserSavedData.db', check_same_thread=False)
+conn = sqlite3.connect('UserSavedData.db', check_same_thread=False)
 
-pickled_model = pickle.load(open(f'ML Model/model.pkl', 'rb'))
+pickled_model = pickle.load(open('model.pkl', 'rb'))
 
 @app.route('/')
 def student():
