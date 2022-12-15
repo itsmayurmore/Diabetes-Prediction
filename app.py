@@ -1,10 +1,10 @@
 from flask import Flask, render_template, request
 import pickle
-import sqlite3
+# import sqlite3
 
 app = Flask(__name__)
 
-conn = sqlite3.connect('UserSavedData.db', check_same_thread=False)
+#conn = sqlite3.connect('UserSavedData.db', check_same_thread=False)
 
 pickled_model = pickle.load(open('model.pkl', 'rb'))
 
@@ -27,8 +27,8 @@ def result():
     l = [Pregnancies,Glucose,BloodPressure,SkinThickness,Insulin,Bmi,DiabetesPedigreeFunction,age]
     result = pickled_model.predict([l])
 
-    cur = conn.cursor()
-    query = '''INSERT INTO saved_data (Pregnancies,Glucose,BloodPressure,SkinThickness,Insulin,BMI,DiabetesPedigreeFunction,Age,Outcome) VALUES (?,?,?,?,?,?,?,?,?)'''
+    # cur = conn.cursor()
+    # query = '''INSERT INTO saved_data (Pregnancies,Glucose,BloodPressure,SkinThickness,Insulin,BMI,DiabetesPedigreeFunction,Age,Outcome) VALUES (?,?,?,?,?,?,?,?,?)'''
     
     if(result.astype(int) == 1):
         output = "Tested Positive for Diabetes"
@@ -37,10 +37,10 @@ def result():
         output = "Tested Negative for Diabetes"
         out = 0
 
-    cur.execute(query,(Pregnancies,Glucose,BloodPressure,SkinThickness,Insulin,Bmi,DiabetesPedigreeFunction,age,out))
+    # cur.execute(query,(Pregnancies,Glucose,BloodPressure,SkinThickness,Insulin,Bmi,DiabetesPedigreeFunction,age,out))
 
-    conn.commit()
-    conn.close()
+    # conn.commit()
+    # conn.close()
 
     return render_template("result.html",result = output)
 
