@@ -1,9 +1,7 @@
 from flask import Flask, render_template, request
 import pickle
 import mysql.connector
-from dotenv import load_dotenv
 import os
-load_dotenv()
 app = Flask(__name__)
 
 mydb = mysql.connector.connect(
